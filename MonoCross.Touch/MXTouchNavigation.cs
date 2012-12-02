@@ -151,6 +151,7 @@ namespace MonoCross.Touch
 			{ 
 				// we are an iPhone, skip the split view and use the navigation controller instead!
 				this.View = _masterNavigationController.View;
+                _window.RootViewController = _masterNavigationController;
 			}				
 		}
 		
