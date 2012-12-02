@@ -131,7 +131,7 @@ namespace MonoCross.Touch
 		private MXTouchContainer (MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window): base(theApp)
 		{
 			_appDelegate = appDelegate;
-			_touchNavigation = new MXTouchNavigation(_appDelegate);
+			_touchNavigation = new MXTouchNavigation(_appDelegate, window);
 			_window = window;
 			
 			ViewGroups = new List<MXTouchViewGroup>();

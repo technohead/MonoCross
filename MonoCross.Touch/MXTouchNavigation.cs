@@ -56,11 +56,13 @@ namespace MonoCross.Touch
 	public class MXTouchNavigation
 	{
 		static MXTouchNavigation _instance;
-		
-		public MXTouchNavigation (UIApplicationDelegate appDelegate)
+        static UIWindow _window;
+
+		public MXTouchNavigation (UIApplicationDelegate appDelegate, UIWindow window)
 		{
 			_instance = this;
-			
+            _window = window;
+
 			var options = Attribute.GetCustomAttribute(appDelegate.GetType(), typeof(MXTouchContainerOptions)) as MXTouchContainerOptions;
 			_options = options ?? new MXTouchContainerOptions();
 
@@ -113,7 +115,10 @@ namespace MonoCross.Touch
 		{
 			_masterNavigationController = new UINavigationController(viewController);
 
-			if (IsTablet && _tabletOptions.TabletLayout == TabletLayout.MasterPane)
+            // added the following to set RootViewController
+            _window.RootViewController = _masterNavigationController;
+
+            if (IsTablet && _tabletOptions.TabletLayout == TabletLayout.MasterPane)
 			{
 				// toss a generic view in the detail pane
 				_splashViewController = new SplashViewController(_options.SplashBitmap);
