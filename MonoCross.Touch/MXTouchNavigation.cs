@@ -115,8 +115,6 @@ namespace MonoCross.Touch
 		{
 			_masterNavigationController = new UINavigationController(viewController);
 
-            // added the following to set RootViewController
-            _window.RootViewController = _masterNavigationController;
 
             if (IsTablet && _tabletOptions.TabletLayout == TabletLayout.MasterPane)
 			{
@@ -126,6 +124,8 @@ namespace MonoCross.Touch
 				
 				// initialize the SplitPane
 				_splitViewController = new MGSplitViewController();
+                // added the following to set RootViewController
+
 				_splitViewController.SetViewControllers(new UIViewController[2] { _masterNavigationController, _detailNavigationController });
 				_splitViewController.SetShowsMasterInPortrait(_tabletOptions.MasterShowsinPotrait);
 				_splitViewController.SetShowsMasterInLandscape(_tabletOptions.MasterShowsinLandscape);
@@ -134,8 +134,11 @@ namespace MonoCross.Touch
 					_splitViewController.SetDividerStyle(MGSplitViewDividerStyle.PaneSplitter);
 				else 
 					_splitViewController.SetDividerStyle(MGSplitViewDividerStyle.Thin);
-				
-				// primary view with be the split view
+
+                _window.RootViewController = _splitViewController;
+
+                
+                // primary view with be the split view
 				this.View = _splitViewController.View;
 				
 				if (_options.NavigationBarTintColor != UIColor.Clear)

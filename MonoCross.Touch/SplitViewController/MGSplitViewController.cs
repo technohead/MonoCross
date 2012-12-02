@@ -562,7 +562,9 @@ namespace MonoCross.Touch
 			if (IsShowingMaster()) {
 				_masterViewController.ViewWillAppear(animated);
 			}
-			_detailViewController.ViewWillAppear(animated);
+
+            if (_detailViewController != null)
+			    _detailViewController.ViewWillAppear(animated);
 		
 			_reconfigurePopup = true;
 			LayoutSubviews();
