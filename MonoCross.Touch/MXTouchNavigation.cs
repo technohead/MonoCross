@@ -58,7 +58,7 @@ namespace MonoCross.Touch
 		static MXTouchNavigation _instance;
         static UIWindow _window;
 
-		public MXTouchNavigation (UIApplicationDelegate appDelegate, UIWindow window)
+		public MXTouchNavigation (UIApplicationDelegate appDelegate, UIWindow window = null)
 		{
 			_instance = this;
             _window = window;
@@ -135,7 +135,8 @@ namespace MonoCross.Touch
 				else 
 					_splitViewController.SetDividerStyle(MGSplitViewDividerStyle.Thin);
 
-                _window.RootViewController = _splitViewController;
+                if (_window != null)
+                    _window.RootViewController = _splitViewController;
 
                 
                 // primary view with be the split view
