@@ -31,6 +31,10 @@ namespace MonoCross.Touch
         {
         }
 
+        public MXTouchTableViewController(UITableViewStyle style) : base(style)
+        {
+        }
+
         public T Model { get; set; }
         public Type ModelType { get { return typeof(T); } }
         public abstract void Render();
