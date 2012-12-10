@@ -4,6 +4,7 @@ using MonoTouch.UIKit;
 using MonoTouch.Dialog;
 
 using MonoCross.Navigation;
+using MonoTouch.Foundation;
 
 namespace MonoCross.Touch
 {
@@ -13,6 +14,10 @@ namespace MonoCross.Touch
     public abstract class MXTouchViewController<T>: UIViewController, IMXView
     {
         public MXTouchViewController ()
+        {
+        }
+
+        public MXTouchViewController (string nibname, NSBundle bundle) : base(nibname, bundle)
         {
         }
 
