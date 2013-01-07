@@ -204,7 +204,8 @@ namespace MonoCross.Touch
 
 			if (_splitViewController != null)
 			{
-				_splitViewController.HidePopover();
+                // DKL - commented out as this was causing the popup detail to immediately disappear
+				//_splitViewController.HidePopover();
 				_detailNavigationController.SetViewControllers(new UIViewController[1] { vc }, false);
 				//_splitViewController.SetDetailViewController(_detailNavigationController = new UINavigationController(vc));
 				_splitViewController.UpdateMasterButton();

@@ -10,6 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>MonoCross.Touch</RootNamespace>
     <AssemblyName>MonoCross.Touch</AssemblyName>
+    <ReleaseVersion>0.4</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
