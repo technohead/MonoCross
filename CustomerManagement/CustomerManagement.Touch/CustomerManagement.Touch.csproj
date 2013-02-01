@@ -61,6 +61,7 @@
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="MonoTouch.Dialog-1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -79,10 +80,6 @@
     <ProjectReference Include="..\..\MonoCross.Touch\MonoCross.Touch.csproj">
       <Project>{4F743690-64BD-4B1F-BD75-872C910A94E2}</Project>
       <Name>MonoCross.Touch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
-      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
-      <Name>MonoTouch.Dialog</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

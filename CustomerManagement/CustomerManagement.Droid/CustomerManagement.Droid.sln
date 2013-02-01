@@ -1,11 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Droid", "CustomerManagement.Droid.csproj", "{4A9648A5-460A-48FC-B85B-609FC478EC04}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Shared.MD", "..\..\CustomerManagement.Shared\CustomerManagement.Shared.MD.csproj", "{27513705-0A31-4A9F-9393-76B6C3CEA1AD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Data.MD", "..\..\CustomerManagement.Data\CustomerManagement.Data.MD.csproj", "{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{427890BB-22DF-4371-85DC-2B06C6C4D393}"
 EndProject
@@ -13,13 +9,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoCross.Droid", "..\..\Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoCross.Navigation.MD", "..\..\MonoCross.Navigation\MonoCross.Navigation.MD.csproj", "{0D2CC54A-4716-40B9-8110-453F528810FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Android.Dialog", "..\..\Android.Dialog\Android.Dialog.csproj", "{33044C7B-47A4-4113-A61A-EB429407F818}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.MD", "..\CustomerManagement\CustomerManagement.MD.csproj", "{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Container", "Container", "{FFE0FE20-C040-4B94-9C7F-646AACCDBA27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Droid", "CustomerManagement.Droid.csproj", "{4A9648A5-460A-48FC-B85B-609FC478EC04}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{02D6B168-A9C0-4CB1-BCFF-D2A3428579F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Android.Dialog", "..\..\Android.Dialog\Android.Dialog.csproj", "{33044C7B-47A4-4113-A61A-EB429407F818}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Data.MD", "..\..\CustomerManagement.Data\CustomerManagement.Data.MD.csproj", "{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,16 +27,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0D2CC54A-4716-40B9-8110-453F528810FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D2CC54A-4716-40B9-8110-453F528810FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D2CC54A-4716-40B9-8110-453F528810FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D2CC54A-4716-40B9-8110-453F528810FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{27513705-0A31-4A9F-9393-76B6C3CEA1AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27513705-0A31-4A9F-9393-76B6C3CEA1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27513705-0A31-4A9F-9393-76B6C3CEA1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27513705-0A31-4A9F-9393-76B6C3CEA1AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33044C7B-47A4-4113-A61A-EB429407F818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33044C7B-47A4-4113-A61A-EB429407F818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33044C7B-47A4-4113-A61A-EB429407F818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33044C7B-47A4-4113-A61A-EB429407F818}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Release|Any CPU.Build.0 = Release|Any CPU
 		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,30 +51,149 @@ Global
 		{B8448676-C9FE-42A3-A30B-F2FFA096E7D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8448676-C9FE-42A3-A30B-F2FFA096E7D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8448676-C9FE-42A3-A30B-F2FFA096E7D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D2CC54A-4716-40B9-8110-453F528810FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D2CC54A-4716-40B9-8110-453F528810FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D2CC54A-4716-40B9-8110-453F528810FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D2CC54A-4716-40B9-8110-453F528810FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33044C7B-47A4-4113-A61A-EB429407F818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33044C7B-47A4-4113-A61A-EB429407F818}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33044C7B-47A4-4113-A61A-EB429407F818}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33044C7B-47A4-4113-A61A-EB429407F818}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4A9648A5-460A-48FC-B85B-609FC478EC04} = {FFE0FE20-C040-4B94-9C7F-646AACCDBA27}
-		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725} = {02D6B168-A9C0-4CB1-BCFF-D2A3428579F4}
 		{B8448676-C9FE-42A3-A30B-F2FFA096E7D9} = {427890BB-22DF-4371-85DC-2B06C6C4D393}
 		{0D2CC54A-4716-40B9-8110-453F528810FC} = {427890BB-22DF-4371-85DC-2B06C6C4D393}
 		{33044C7B-47A4-4113-A61A-EB429407F818} = {427890BB-22DF-4371-85DC-2B06C6C4D393}
+		{4A9648A5-460A-48FC-B85B-609FC478EC04} = {FFE0FE20-C040-4B94-9C7F-646AACCDBA27}
+		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725} = {02D6B168-A9C0-4CB1-BCFF-D2A3428579F4}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = CustomerManagement.Droid.csproj
+		Policies = $0
+		$0.NameConventionPolicy = $1
+		$1.Rules = $2
+		$2.NamingRule = $3
+		$3.Name = Namespaces
+		$3.AffectedEntity = Namespace
+		$3.VisibilityMask = VisibilityMask
+		$3.NamingStyle = PascalCase
+		$3.IncludeInstanceMembers = True
+		$3.IncludeStaticEntities = True
+		$2.NamingRule = $4
+		$4.Name = Types
+		$4.AffectedEntity = Class, Struct, Enum, Delegate
+		$4.VisibilityMask = Public
+		$4.NamingStyle = PascalCase
+		$4.IncludeInstanceMembers = True
+		$4.IncludeStaticEntities = True
+		$2.NamingRule = $5
+		$5.Name = Interfaces
+		$5.RequiredPrefixes = $6
+		$6.String = I
+		$5.AffectedEntity = Interface
+		$5.VisibilityMask = Public
+		$5.NamingStyle = PascalCase
+		$5.IncludeInstanceMembers = True
+		$5.IncludeStaticEntities = True
+		$2.NamingRule = $7
+		$7.Name = Attributes
+		$7.RequiredSuffixes = $8
+		$8.String = Attribute
+		$7.AffectedEntity = CustomAttributes
+		$7.VisibilityMask = Public
+		$7.NamingStyle = PascalCase
+		$7.IncludeInstanceMembers = True
+		$7.IncludeStaticEntities = True
+		$2.NamingRule = $9
+		$9.Name = Event Arguments
+		$9.RequiredSuffixes = $10
+		$10.String = EventArgs
+		$9.AffectedEntity = CustomEventArgs
+		$9.VisibilityMask = Public
+		$9.NamingStyle = PascalCase
+		$9.IncludeInstanceMembers = True
+		$9.IncludeStaticEntities = True
+		$2.NamingRule = $11
+		$11.Name = Exceptions
+		$11.RequiredSuffixes = $12
+		$12.String = Exception
+		$11.AffectedEntity = CustomExceptions
+		$11.VisibilityMask = VisibilityMask
+		$11.NamingStyle = PascalCase
+		$11.IncludeInstanceMembers = True
+		$11.IncludeStaticEntities = True
+		$2.NamingRule = $13
+		$13.Name = Methods
+		$13.AffectedEntity = Methods
+		$13.VisibilityMask = Protected, Public
+		$13.NamingStyle = PascalCase
+		$13.IncludeInstanceMembers = True
+		$13.IncludeStaticEntities = True
+		$2.NamingRule = $14
+		$14.Name = Static Readonly Fields
+		$14.AffectedEntity = ReadonlyField
+		$14.VisibilityMask = Protected, Public
+		$14.NamingStyle = PascalCase
+		$14.IncludeInstanceMembers = False
+		$14.IncludeStaticEntities = True
+		$2.NamingRule = $15
+		$15.Name = Fields
+		$15.AffectedEntity = Field
+		$15.VisibilityMask = Protected, Public
+		$15.NamingStyle = PascalCase
+		$15.IncludeInstanceMembers = True
+		$15.IncludeStaticEntities = True
+		$2.NamingRule = $16
+		$16.Name = ReadOnly Fields
+		$16.AffectedEntity = ReadonlyField
+		$16.VisibilityMask = Protected, Public
+		$16.NamingStyle = PascalCase
+		$16.IncludeInstanceMembers = True
+		$16.IncludeStaticEntities = False
+		$2.NamingRule = $17
+		$17.Name = Constant Fields
+		$17.AffectedEntity = ConstantField
+		$17.VisibilityMask = Protected, Public
+		$17.NamingStyle = PascalCase
+		$17.IncludeInstanceMembers = True
+		$17.IncludeStaticEntities = True
+		$2.NamingRule = $18
+		$18.Name = Properties
+		$18.AffectedEntity = Property
+		$18.VisibilityMask = Protected, Public
+		$18.NamingStyle = PascalCase
+		$18.IncludeInstanceMembers = True
+		$18.IncludeStaticEntities = True
+		$2.NamingRule = $19
+		$19.Name = Events
+		$19.AffectedEntity = Event
+		$19.VisibilityMask = Protected, Public
+		$19.NamingStyle = PascalCase
+		$19.IncludeInstanceMembers = True
+		$19.IncludeStaticEntities = True
+		$2.NamingRule = $20
+		$20.Name = Enum Members
+		$20.AffectedEntity = EnumMember
+		$20.VisibilityMask = VisibilityMask
+		$20.NamingStyle = PascalCase
+		$20.IncludeInstanceMembers = True
+		$20.IncludeStaticEntities = True
+		$2.NamingRule = $21
+		$21.Name = Parameters
+		$21.AffectedEntity = Parameter
+		$21.VisibilityMask = VisibilityMask
+		$21.NamingStyle = CamelCase
+		$21.IncludeInstanceMembers = True
+		$21.IncludeStaticEntities = True
+		$2.NamingRule = $22
+		$22.Name = Type Parameters
+		$22.RequiredPrefixes = $23
+		$23.String = T
+		$22.AffectedEntity = TypeParameter
+		$22.VisibilityMask = VisibilityMask
+		$22.NamingStyle = PascalCase
+		$22.IncludeInstanceMembers = True
+		$22.IncludeStaticEntities = True
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
