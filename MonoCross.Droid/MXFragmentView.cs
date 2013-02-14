@@ -29,14 +29,38 @@ namespace MonoCross.Droid
                 mapping.Controller.Load(new Dictionary<string, string>());
                 SetModel(mapping.Controller.GetModel());
             }
+
+            ViewModelChanged += OnViewModelChanged;
+            // render the model within the view
+            //Render();
         }
 
-        public T Model { get; set; }
+        public T Model
+        {
+            get { return _model; }
+            set { _model = value; NotifyModelChanged(); }
+        }
+
+        private T _model;
+
         public Type ModelType { get { return typeof(T); } }
         public virtual void Render() { /* Override OnCreateView() in your subclass to render the view. */ }
         public void SetModel(object model)
         {
             Model = (T)model;
+        }
+
+        public event ModelEventHandler ViewModelChanged;
+        protected virtual void OnViewModelChanged(object model) { }
+        
+        /// <summary>
+        /// Fires OnViewModelChanged and refreshes the view
+        /// </summary>
+        private void NotifyModelChanged()
+        {
+            if (ViewModelChanged != null) 
+                ViewModelChanged(Model);
+            //ReloadData();
         }
     }
 }
