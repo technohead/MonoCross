@@ -10,12 +10,22 @@ namespace MonoCross.Touch
 	/// </summary>
 	public class MXTouchViewGroupItem
 	{
+
 		public MXTouchViewGroupItem(Type viewType, String title, String iconFile)
 		{
 			this.ViewType = viewType;
 			this.View = null;
 			this.Title = title;
-			this.Icon = iconFile;
+			this.Image = UIImage.FromFile(iconFile);
+			//this.Icon = iconFile;
+		}
+
+		public MXTouchViewGroupItem(Type viewType, String title, UIImage image)
+		{
+			this.ViewType = viewType;
+			this.View = null;
+			this.Title = title;
+			this.Image = image;
 		}
 
 		public MXTouchViewGroupItem(IMXView view, String title, String iconFile)
@@ -23,13 +33,24 @@ namespace MonoCross.Touch
 			this.ViewType = view.GetType();
 			this.View = view;
 			this.Title = title;
-			this.Icon = iconFile;
+			this.Image = UIImage.FromFile(iconFile);
 		}
-		
+
+
+		public MXTouchViewGroupItem(IMXView view, String title, UIImage image)
+		{
+			this.ViewType = view.GetType();
+			this.View = view;
+			this.Title = title;
+			this.Image = image;
+			//this.Icon = iconFile;
+		}
+
 		public IMXView View { get; set; }
 		public Type ViewType { get; private set; }
-		public String Icon { get; set; }
+		//public String Icon { get; set; }
 		public String Title { get; set; }
+		public UIImage Image { get; set; }
 	}
 	
 	/// <summary>
@@ -37,6 +58,7 @@ namespace MonoCross.Touch
 	/// </summary>
 	public class MXTouchViewGroup
 	{
+
 		public MXTouchViewGroup(IMXTouchViewGroupController controller, MXTouchViewGroupItem[] items)
 		{
 			ViewController = controller;
@@ -96,7 +118,7 @@ namespace MonoCross.Touch
 				navCtrl.NavigationBar.TintColor = UIColor.Red;
 				
 				//navCtrl.NavigationBar.TintColor = UIColor.Black; ?? get from where??
-				navCtrl.TabBarItem = new UITabBarItem (tabItem.Title, UIImage.FromFile(tabItem.Icon), index);
+				navCtrl.TabBarItem = new UITabBarItem (tabItem.Title, tabItem.Image, index);
 				tabControllers[index] = navCtrl;
 				index++;
 			}
@@ -132,7 +154,8 @@ namespace MonoCross.Touch
 			{
 				_parent = parent;
 			}
-			
+
+
 			public override bool ShouldSelectViewController (UITabBarController tabBarController, UIViewController viewController)
 			{
 				UINavigationController navController = viewController as UINavigationController;
@@ -158,6 +181,7 @@ namespace MonoCross.Touch
 				
 				return true;
 			}
+
 			public override void ViewControllerSelected (UITabBarController tabBarController, UIViewController viewController)
 			{
 				System.Console.WriteLine("TabBarControllerDelegate:ViewControllerSelected");

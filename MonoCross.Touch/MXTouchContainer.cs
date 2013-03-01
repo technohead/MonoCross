@@ -258,7 +258,7 @@ namespace MonoCross.Touch
 		}
 		*/
 		
-		void LoadViewForController(IMXView fromView, IMXController controller, MXViewPerspective viewPerspective)
+		public void LoadViewForController(IMXView fromView, IMXController controller, MXViewPerspective viewPerspective)
 		{
 			HideLoading();
 			
