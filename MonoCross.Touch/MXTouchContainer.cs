@@ -295,7 +295,18 @@ namespace MonoCross.Touch
 			{
 				// it's just an in-context view, just slap it on top of the view that navigated it here!
 				UIViewController parentViewController = fromView as UIViewController;
-				parentViewController.NavigationController.PushViewController(viewController, true);
+				try
+				{
+					parentViewController.NavigationController.PushViewController(viewController, true);
+				}
+				catch (Exception ex)
+				{
+					if (ex.Message.StartsWith("Objective-C exception thrown.  Name: NSInvalidArgumentException Reason: Pushing"))
+						parentViewController.NavigationController.PopToViewController(viewController, true);
+					else
+						throw;
+
+				}
 			}
 			else 
 			{
