@@ -91,9 +91,11 @@ namespace MonoCross.Touch
 	public class MXTouchViewGroupTabController : UITabBarController, IMXTouchViewGroupController
 	{
 		internal MXTouchViewGroup _viewGroup;
+		protected UIColor tintColor;
 		
-		public MXTouchViewGroupTabController()
+		public MXTouchViewGroupTabController(UIColor tintColor = UIColor.Red)
 		{
+			this.tintColor = tintColor;
 			this.Delegate = new TabBarControllerDelegate(this);
 		}
 
@@ -115,7 +117,7 @@ namespace MonoCross.Touch
 			foreach (var tabItem in viewGroup.Items) {
 				var navCtrl = new UINavigationController();
 
-				navCtrl.NavigationBar.TintColor = UIColor.Red;
+				navCtrl.NavigationBar.TintColor = this.tintColor;
 				
 				//navCtrl.NavigationBar.TintColor = UIColor.Black; ?? get from where??
 				navCtrl.TabBarItem = new UITabBarItem (tabItem.Title, tabItem.Image, index);
