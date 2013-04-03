@@ -98,7 +98,7 @@ namespace MonoCross.Touch
 		{
 		}
 
-		public MXTouchViewGroupTabController(UIColor tintColor) : this()
+		public MXTouchViewGroupTabController(UIColor tintColor)
 		{
 			this.tintColor = tintColor;
 			this.Delegate = new TabBarControllerDelegate(this);
