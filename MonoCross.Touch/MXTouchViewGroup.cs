@@ -90,7 +90,7 @@ namespace MonoCross.Touch
 	/// </summary>
 	public class MXTouchViewGroupTabController : UITabBarController, IMXTouchViewGroupController
 	{
-		internal MXTouchViewGroup _viewGroup;
+		public MXTouchViewGroup ViewGroup { private set; get; }
 		protected UIColor tintColor;
 
 
@@ -106,11 +106,11 @@ namespace MonoCross.Touch
 
 		public void Render(MXTouchViewGroup viewGroup)
 		{
-			if (_viewGroup != null)
+			if (ViewGroup != null)
 				// already rendered
 				return;
 			
-			_viewGroup = viewGroup;
+			ViewGroup = viewGroup;
 			
 			System.Console.WriteLine("MXTouchViewGroupTabController: Render");
 			
@@ -173,7 +173,7 @@ namespace MonoCross.Touch
 					int index = Array.IndexOf(tabBarController.ViewControllers, viewController);
 					if (index >= 0)
 					{
-						Type viewType = _parent._viewGroup.Items[index].ViewType;
+						Type viewType = _parent.ViewGroup.Items[index].ViewType;
 						
 						MXViewPerspective viewPerspective = MXContainer.Instance.Views.GetViewPerspectiveForViewType(viewType);
 						string pattern = MXContainer.Instance.App.NavigationMap.GetPatternForModelType(viewPerspective.ModelType);
