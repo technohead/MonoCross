@@ -92,17 +92,22 @@ namespace MonoCross.Touch
 	{
 		public MXTouchViewGroup ViewGroup { private set; get; }
 		protected UIColor tintColor;
-
+		protected UITabBarControllerDelegate tabBarControllerDelegate;
 
 		public MXTouchViewGroupTabController() : this (UIColor.Red)
 		{
 		}
 
-		public MXTouchViewGroupTabController(UIColor tintColor)
+		public MXTouchViewGroupTabController(UIColor tintColor, UITabBarControllerDelegate tabBarControllerDelegate = null)
 		{
 			this.tintColor = tintColor;
-			this.Delegate = new TabBarControllerDelegate(this);
+
+			if (tabBarControllerDelegate != null)
+				this.tabBarControllerDelegate = tabBarControllerDelegate;
+			else
+				this.tabBarControllerDelegate = new TabBarControllerDelegate(this);
 		}
+
 
 		public void Render(MXTouchViewGroup viewGroup)
 		{
@@ -114,7 +119,7 @@ namespace MonoCross.Touch
 			
 			System.Console.WriteLine("MXTouchViewGroupTabController: Render");
 			
-			this.Delegate = new TabBarControllerDelegate(this);
+			this.Delegate = this.tabBarControllerDelegate;
 
 			var tabControllers = new UIViewController[viewGroup.Items.Count];
 
