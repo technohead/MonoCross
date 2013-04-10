@@ -13,17 +13,30 @@ namespace MonoCross.Touch
 		public SplashViewController (string imageFile)
 		{
 			UIImage image = null;
+			
 			if (!String.IsNullOrEmpty(imageFile))
-				image = UIImage.FromFile(imageFile);
+			{
+				if (UIScreen.MainScreen.Bounds.Height == 568)
+					image = UIImage.FromBundle(String.Format("{0}-568h", imageFile));
+				else
+					image = UIImage.FromBundle(imageFile);
+			}
 
 			if (image != null)
+			{
 				_imageView = new UIImageView(image);
-			else
-				_imageView = new UIImageView();
-			_imageView.ContentMode = UIViewContentMode.Center;
-			_imageView.BackgroundColor = UIColor.White;
+				_imageView.ContentMode = UIViewContentMode.Center;
+				_imageView.BackgroundColor = UIColor.White;
+			
+				this.View = _imageView;
+			}
+		}
 
-			this.View = _imageView;
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			this.View.BackgroundColor = UIColor.Clear;
 		}
 
 		public override void WillRotate (UIInterfaceOrientation toInterfaceOrientation, double duration)

@@ -149,9 +149,13 @@ namespace MonoCross.Touch
 				if (options != null) {
 					bitmapFile = options.SplashBitmap;
 				}
-				_splashViewController = new SplashViewController(bitmapFile);
-				_window.AddSubview(_splashViewController.View);
-				_window.MakeKeyAndVisible();
+
+				if (!String.IsNullOrEmpty(bitmapFile))
+				{
+					_splashViewController = new SplashViewController(bitmapFile);
+					_window.AddSubview(_splashViewController.View);
+					_window.MakeKeyAndVisible();
+				}
 			}
 		}
 		
