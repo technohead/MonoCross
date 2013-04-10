@@ -10,7 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>MonoCross.Navigation.MT</RootNamespace>
     <AssemblyName>MonoCross.Navigation.MT</AssemblyName>
-    <ReleaseVersion>0.4</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>

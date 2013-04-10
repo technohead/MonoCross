@@ -13,7 +13,7 @@ namespace MonoCross.Navigation
             MXContainer.Navigate(view, url);
         }
 
-        public static void Navigate(this IMXView view, string url, Dictionary<string, string> parameters)
+        public static void Navigate(this IMXView view, string url, Dictionary<string, object> parameters)
         {
             MXContainer.Navigate(view, url, parameters);
         }
@@ -156,20 +156,20 @@ namespace MonoCross.Navigation
 
         public static void Navigate(string url)
         {
-            InternalNavigate(null, url, new Dictionary<string, string>());
+            InternalNavigate(null, url, new Dictionary<string, object>());
         }
 
         public static void Navigate(IMXView view, string url)
         {
-            InternalNavigate(view, url, new Dictionary<string, string>());
+            InternalNavigate(view, url, new Dictionary<string, object>());
         }
 
-        public static void Navigate(IMXView view, string url, Dictionary<string, string> parameters)
+        public static void Navigate(IMXView view, string url, Dictionary<string, object> parameters)
         {
             InternalNavigate(view, url, parameters);
         }
 
-        private static void InternalNavigate(IMXView fromView, string url, Dictionary<string, string> parameters)
+        private static void InternalNavigate(IMXView fromView, string url, Dictionary<string, object> parameters)
         {
             MXContainer container = Instance;   // optimization for the server size, property reference is a hashed lookup
 
@@ -207,7 +207,7 @@ namespace MonoCross.Navigation
             }
         }
 
-        static void TryLoadController(MXContainer container, IMXView fromView, IMXController controller, Dictionary<string, string> parameters)
+        static void TryLoadController(MXContainer container, IMXView fromView, IMXController controller, Dictionary<string, object> parameters)
         {
             try
             {
@@ -219,7 +219,7 @@ namespace MonoCross.Navigation
             }
         }
 
-        void LoadController(IMXView fromView, IMXController controller, Dictionary<string, string> parameters)
+        void LoadController(IMXView fromView, IMXController controller, Dictionary<string, object> parameters)
         {
             string perspective = controller.Load(parameters);
             if (!Instance.CancelLoad) // done if failed
@@ -244,7 +244,7 @@ namespace MonoCross.Navigation
 
         public abstract void Redirect(string url);
 
-        public virtual IMXController GetController(string url, ref Dictionary<string, string> parameters)
+        public virtual IMXController GetController(string url, ref Dictionary<string, object> parameters)
         {
             IMXController controller = null;
             MXNavigation navigation = null;
@@ -258,7 +258,7 @@ namespace MonoCross.Navigation
             LastNavigationUrl = url;
 
             // initialize parameter dictionary if not provided
-            parameters = (parameters ?? new Dictionary<string, string>());
+            parameters = (parameters ?? new Dictionary<string, object>());
 
             // for debug
             // Console.WriteLine("Navigating to: " + url);
