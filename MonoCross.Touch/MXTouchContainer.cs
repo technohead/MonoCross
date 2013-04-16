@@ -127,6 +127,8 @@ namespace MonoCross.Touch
 		public static RenderLayerDelegate RenderLayer { get; set; }
 
 		public delegate UIViewController RenderLayerDelegate(IMXView view);
+
+
 		
 		private MXTouchContainer (MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window): base(theApp)
 		{
@@ -276,6 +278,8 @@ namespace MonoCross.Touch
 					throw new ArgumentException("View creation failed for perspective!" + viewPerspective.ToString());
 				}
 			}
+
+			this.CurrentView = controller.View;
 
 			// asign the view it's model and render the contents of the view
 			controller.View.SetModel(controller.GetModel());
