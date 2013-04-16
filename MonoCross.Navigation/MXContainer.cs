@@ -67,6 +67,8 @@ namespace MonoCross.Navigation
             get { return _views; }
         }
 
+		public IMXView CurrentView { protected set; get; }
+
         // ctor/abstract singleton initializers
 
         // disallow explict construction of the container by non-derived classes
