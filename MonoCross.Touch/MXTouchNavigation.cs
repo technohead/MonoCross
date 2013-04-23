@@ -58,6 +58,8 @@ namespace MonoCross.Touch
 		static MXTouchNavigation _instance;
         static UIWindow _window;
 
+
+
 		public MXTouchNavigation (UIApplicationDelegate appDelegate, UIWindow window = null)
 		{
 			_instance = this;
@@ -164,6 +166,8 @@ namespace MonoCross.Touch
 
 			// put the item in the proper view group
 			int groupIndex = viewGroup.Items.FindIndex( vgi => vgi == viewGroupItem );
+
+
 			viewGroup.ViewController.RenderItem(groupIndex, viewController);
 
 			// only support the master for now

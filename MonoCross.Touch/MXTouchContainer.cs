@@ -129,7 +129,7 @@ namespace MonoCross.Touch
 		public delegate UIViewController RenderLayerDelegate(IMXView view);
 
 
-		
+
 		private MXTouchContainer (MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window): base(theApp)
 		{
 			_appDelegate = appDelegate;
@@ -338,6 +338,10 @@ namespace MonoCross.Touch
 				{
 					// activate the group!
 					_touchNavigation.PushToViewGroup(viewGroup, viewGroupItem, controller.View as UIViewController);
+
+					this.GroupIndex = viewGroup.Items.FindIndex( vgi => vgi == viewGroupItem );
+
+
 				}
 				else
 				{
