@@ -339,7 +339,6 @@ namespace MonoCross.Touch
 					// activate the group!
 					_touchNavigation.PushToViewGroup(viewGroup, viewGroupItem, controller.View as UIViewController);
 
-					this.GroupIndex = viewGroup.Items.FindIndex( vgi => vgi == viewGroupItem );
 
 
 				}
