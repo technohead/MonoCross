@@ -68,7 +68,6 @@ namespace MonoCross.Navigation
         }
 
 		public IMXView CurrentView { protected set; get; }
-		public int GroupIndex { protected set; get; }
 
         // ctor/abstract singleton initializers
 
