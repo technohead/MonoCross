@@ -93,6 +93,7 @@ namespace MonoCross.Touch
 		public MXTouchViewGroup ViewGroup { private set; get; }
 		protected UIColor tintColor;
 		protected UITabBarControllerDelegate tabBarControllerDelegate;
+		public UINavigationController CurrentNavigationController { private set; get; }
 
 		public MXTouchViewGroupTabController() : this (UIColor.Red)
 		{
@@ -156,6 +157,8 @@ namespace MonoCross.Touch
 			UINavigationController navController = ViewControllers[SelectedIndex] as UINavigationController;
 			//UINavigationControllerExtensions.DisplayViewController(ViewControllers[SelectedIndex] as UINavigationController, viewController, true);
 			navController.DisplayViewController(viewController, true);
+
+			CurrentNavigationController = navController;
 		}
 		
 		private class TabBarControllerDelegate: UITabBarControllerDelegate

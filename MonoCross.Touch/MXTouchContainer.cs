@@ -279,8 +279,7 @@ namespace MonoCross.Touch
 				}
 			}
 
-			this.CurrentView = controller.View;
-
+	
 			// asign the view it's model and render the contents of the view
 			controller.View.SetModel(controller.GetModel());
 			controller.View.Render();
