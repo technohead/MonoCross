@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using MonoCross.Navigation;
 using MonoCross.Touch;
@@ -302,18 +303,11 @@ namespace MonoCross.Touch
 			{
 				// it's just an in-context view, just slap it on top of the view that navigated it here!
 				UIViewController parentViewController = fromView as UIViewController;
-				try
-				{
+				if (!parentViewController.NavigationController.ViewControllers.Contains(viewController))
 					parentViewController.NavigationController.PushViewController(viewController, true);
-				}
-				catch (Exception ex)
-				{
-					if (ex.Message.StartsWith("Objective-C exception thrown.  Name: NSInvalidArgumentException Reason: Pushing"))
-						parentViewController.NavigationController.PopToViewController(viewController, true);
-					else
-						throw;
+				else
+					parentViewController.NavigationController.PopToViewController(viewController, true);
 
-				}
 			}
 			else 
 			{
