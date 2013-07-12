@@ -35,7 +35,7 @@ namespace MonoCross.Droid
                 }
                 else
                 {
-                    mapping.Controller.Load(new Dictionary<string, string>());
+                    mapping.Controller.Load(new Dictionary<string, object>());
                     SetModel(mapping.Controller.GetModel());
                 }
             }
