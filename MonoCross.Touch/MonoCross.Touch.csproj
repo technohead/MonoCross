@@ -58,7 +58,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="MonoTouch.Dialog-1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -72,11 +71,17 @@
     <Compile Include="SplitViewController\MGDividerView.cs" />
     <Compile Include="SplitViewController\MGSplitViewController.cs" />
     <Compile Include="SplitViewController\MGCornersView.cs" />
+    <Compile Include="MXSlideoutContainer.cs" />
+    <Compile Include="SlideoutNavigationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoCross.Navigation\MonoCross.Navigation.MT.csproj">
       <Project>{0C3337B2-0B8A-4C0B-8330-3B81F5B96B9B}</Project>
       <Name>MonoCross.Navigation.MT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\monotouch.dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
+      <Name>MonoTouch.Dialog</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
