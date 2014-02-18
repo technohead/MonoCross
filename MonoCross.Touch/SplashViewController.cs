@@ -6,7 +6,7 @@ namespace MonoCross.Touch
     /// <summary>
     /// Class to display the initial view when still warming up
     /// </summary>
-	internal class SplashViewController: UIViewController
+	public class SplashViewController: UIViewController
 	{
 		UIImageView _imageView;
 		

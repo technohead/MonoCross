@@ -9,18 +9,19 @@ namespace MonoCross.Touch
 {
 	public class MXTouchSlideoutContainer : MXContainer
 	{
-		UIWindow window;
-		UIApplicationDelegate appDelegate;
-		SplashViewController splashViewController = null;
+		protected UIWindow window;
+		protected UIApplicationDelegate appDelegate;
+		protected SplashViewController splashViewController = null;
 
 
 		public delegate UIViewController RenderLayerDelegate(IMXView view);
 
 		public static RenderLayerDelegate RenderLayer { get; set; }
-		public static SlideoutNavigationController Menu { get; private set; }
+		public static SlideoutNavigationController Menu { get; protected set; }
 
-
-
+		protected MXTouchSlideoutContainer (MXApplication theApp): base(theApp)
+		{
+		}
 
 		private MXTouchSlideoutContainer (MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window): base(theApp)
 		{
@@ -44,7 +45,7 @@ namespace MonoCross.Touch
 			thisContainer.StartApplication();
 		}
 
-		private void StartApplication()
+		protected void StartApplication()
 		{
 
 			if (window.Subviews.Length == 0)
