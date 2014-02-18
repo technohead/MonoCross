@@ -526,7 +526,7 @@ namespace MonoTouch.SlideoutNavigation
 		/// <summary>
 		/// Hides the left menu view, this is done to prevent the two menu's from being displayed at the same time.
 		/// </summary>
-		private void HideLeft ()
+		public void HideLeft ()
 		{
 			if (!_leftMenuShowing)
 				return;
@@ -578,7 +578,7 @@ namespace MonoTouch.SlideoutNavigation
 		/// <summary>
 		/// Hides the right menu view, this is done to prevent the two menu's from being displayed at the same time.
 		/// </summary>
-		private void HideRight ()
+		public void HideRight ()
 		{
 			if (!_rightMenuShowing)
 				return;
