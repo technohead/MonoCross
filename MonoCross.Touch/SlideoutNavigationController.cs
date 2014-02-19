@@ -642,29 +642,32 @@ namespace MonoTouch.SlideoutNavigation
 		/// </summary>
 		public void Hide (bool animate = true)
 		{
-			//Don't hide if its not visible.
-			if (!Visible)
-				return;
-			Visible = false;
+			this.InvokeOnMainThread(()=>{
+				//Don't hide if its not visible.
+				if (!Visible)
+					return;
+				Visible = false;
 
-			UIView view = _internalTopView.View;
+				UIView view = _internalTopView.View;
 
-			NSAction animation = () => {
-				view.Frame = new RectangleF (0, 0, view.Frame.Width, view.Frame.Height); };
-			NSAction finished = () => {
-				if (view.Subviews.Length > 0)
-					view.Subviews [0].UserInteractionEnabled = true;
-				view.RemoveGestureRecognizer (_tapGesture);
-				//Hide the shadow when not needed to increase performance of the top layer!
-				HideShadow ();
-			};
+				NSAction animation = () => {
+					view.Frame = new RectangleF (0, 0, view.Frame.Width, view.Frame.Height); };
+				NSAction finished = () => {
+					if (view.Subviews.Length > 0)
+						view.Subviews [0].UserInteractionEnabled = true;
+					view.RemoveGestureRecognizer (_tapGesture);
+					//Hide the shadow when not needed to increase performance of the top layer!
+					HideShadow ();
+				};
 
-			if (animate)
-				UIView.Animate (SlideSpeed, 0, UIViewAnimationOptions.CurveEaseInOut, animation, finished);
-			else {
-				animation ();
-				finished ();
-			}
+				if (animate)
+					UIView.Animate (SlideSpeed, 0, UIViewAnimationOptions.CurveEaseInOut, animation, finished);
+				else {
+					animation ();
+					finished ();
+				}
+			});
+
 		}
 
 		/// <summary>
