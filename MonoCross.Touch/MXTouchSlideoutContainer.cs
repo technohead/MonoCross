@@ -95,9 +95,10 @@ namespace MonoCross.Touch
 			if (viewController == null)
 				viewController = RenderLayer(controller.View);
 
-
-			//slideoutNavigation.PushToModel(viewController);
-			Menu.TopView = viewController;
+			if (Menu.NavigationController != null && fromView != null)
+				Menu.NavigationController.PushViewController(viewController, true);
+			else
+				Menu.TopView = viewController;
 
 			ShowView();
 		}
