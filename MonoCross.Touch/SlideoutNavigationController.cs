@@ -21,7 +21,6 @@ namespace MonoTouch.SlideoutNavigation
 		private UIViewController _externalMenuViewLeft;
 		private UIViewController _externalMenuViewRight;
 		private bool _ignorePan;
-		private UINavigationController _internalTopNavigation;
 		private float _panOriginX;
 		private bool _displayNavigationBarOnSideBarLeft;
 		private bool _displayNavigationBarOnSideBarRight;
@@ -34,6 +33,9 @@ namespace MonoTouch.SlideoutNavigation
 		private string _menuTextRight = "Right Menu > ";
 		#endregion private attributes
 		#region public attributes
+		public new UINavigationController NavigationController { protected set; get; }
+
+
 		/// <summary>
 		/// Gets or sets the color of the background.
 		/// </summary>
@@ -79,8 +81,8 @@ namespace MonoTouch.SlideoutNavigation
 				if (!value)
 					Hide ();
 
-				if (_internalTopNavigation != null && _internalTopNavigation.ViewControllers.Length > 0) {
-					var view = _internalTopNavigation.ViewControllers [0];
+				if (NavigationController != null && NavigationController.ViewControllers.Length > 0) {
+					var view = NavigationController.ViewControllers [0];
 					view.NavigationItem.LeftBarButtonItem = value ? CreateLeftMenuButton () : null;
 				}
 
@@ -103,8 +105,8 @@ namespace MonoTouch.SlideoutNavigation
 				if (!value)
 					Hide ();
 
-				if (_internalTopNavigation != null && _internalTopNavigation.ViewControllers.Length > 0) {
-					var view = _internalTopNavigation.ViewControllers [0];
+				if (NavigationController != null && NavigationController.ViewControllers.Length > 0) {
+					var view = NavigationController.ViewControllers [0];
 					view.NavigationItem.RightBarButtonItem = value ? CreateRightMenuButton () : null;
 				}
 
@@ -194,10 +196,10 @@ namespace MonoTouch.SlideoutNavigation
 				_menuTextLeft = value;
 				if (LeftMenuEnabled)
 				{
-					if (_internalTopNavigation.ViewControllers == null || _internalTopNavigation.ViewControllers.Length < 1)
+					if (NavigationController.ViewControllers == null || NavigationController.ViewControllers.Length < 1)
 						return;
 
-					UIViewController view = _internalTopNavigation.ViewControllers[0];
+					UIViewController view = NavigationController.ViewControllers[0];
 					view.NavigationItem.LeftBarButtonItem = LeftMenuEnabled ? CreateLeftMenuButton() : null;
 				}
 			}
@@ -215,10 +217,10 @@ namespace MonoTouch.SlideoutNavigation
 				_menuTextRight = value;
 				if (RightMenuEnabled)
 				{
-					if (_internalTopNavigation.ViewControllers == null || _internalTopNavigation.ViewControllers.Length < 1)
+					if (NavigationController.ViewControllers == null || NavigationController.ViewControllers.Length < 1)
 						return;
 
-					UIViewController view = _internalTopNavigation.ViewControllers[0];
+					UIViewController view = NavigationController.ViewControllers[0];
 					view.NavigationItem.RightBarButtonItem = RightMenuEnabled ? CreateRightMenuButton() : null;
 				}
 			}
@@ -305,7 +307,7 @@ namespace MonoTouch.SlideoutNavigation
 						if (_panGesture.NumberOfTouches == 0)
 							return;
 						PointF touch = _panGesture.LocationOfTouch (0, view);
-						if (touch.Y > SlideHeight || _internalTopNavigation.NavigationBarHidden)
+						if (touch.Y > SlideHeight || NavigationController.NavigationBarHidden)
 							_ignorePan = true;
 					}
 				} else if (!_ignorePan && (_panGesture.State == UIGestureRecognizerState.Changed)) {
@@ -610,13 +612,13 @@ namespace MonoTouch.SlideoutNavigation
 		/// </param>
 		public void SelectView (UIViewController view)
 		{
-			if (_internalTopNavigation != null) {
-				_internalTopNavigation.RemoveFromParentViewController ();
-				_internalTopNavigation.View.RemoveFromSuperview ();
-				_internalTopNavigation.Dispose ();
+			if (NavigationController != null) {
+				NavigationController.RemoveFromParentViewController ();
+				NavigationController.View.RemoveFromSuperview ();
+				NavigationController.Dispose ();
 			}
 
-			_internalTopNavigation = new UINavigationController (view) {
+			NavigationController = new UINavigationController (view) {
 				View =
 				{
 					Frame = new RectangleF(0, 0,
@@ -624,8 +626,8 @@ namespace MonoTouch.SlideoutNavigation
 						_internalTopView.View.Frame.Height)
 				}
 			};
-			_internalTopView.AddChildViewController (_internalTopNavigation);
-			_internalTopView.View.AddSubview (_internalTopNavigation.View);
+			_internalTopView.AddChildViewController (NavigationController);
+			_internalTopView.View.AddSubview (NavigationController.View);
 
 			if (LeftMenuEnabled)
 				view.NavigationItem.LeftBarButtonItem = CreateLeftMenuButton ();
@@ -702,7 +704,7 @@ namespace MonoTouch.SlideoutNavigation
 		/// <param name='metrics'>Metrics.</param>
 		public void SetTopNavigationBackgroundImage (UIImage image, UIBarMetrics metrics)
 		{
-			_internalTopNavigation.NavigationBar.SetBackgroundImage (image, metrics);
+			NavigationController.NavigationBar.SetBackgroundImage (image, metrics);
 		}
 		#region Nested type: ProxyNavigationController
 		///<summary>
