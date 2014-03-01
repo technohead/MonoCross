@@ -97,7 +97,12 @@ namespace MonoCross.Touch
 
 
 			if (Menu.NavigationController != null && fromView != null)
-				Menu.NavigationController.PushViewController(viewController, true);
+			{
+				if (Menu.NavigationController.ViewControllers.Contains(viewController))
+					Menu.NavigationController.PopToViewController(viewController, true);
+				else
+					Menu.NavigationController.PushViewController(viewController, true);
+			}
 			else
 				Menu.TopView = viewController;
 
