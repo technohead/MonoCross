@@ -95,6 +95,7 @@ namespace MonoCross.Touch
 			if (viewController == null)
 				viewController = RenderLayer(controller.View);
 
+
 			if (Menu.NavigationController != null && fromView != null)
 				Menu.NavigationController.PushViewController(viewController, true);
 			else

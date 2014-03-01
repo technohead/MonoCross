@@ -33,9 +33,11 @@ namespace MonoTouch.SlideoutNavigation
 		private string _menuTextLeft = " < Menu Left";
 		private string _menuTextRight = "Right Menu > ";
 
-		public UINavigationController NavigationController;
 		#endregion private attributes
 		#region public attributes
+		public new UINavigationController NavigationController { protected set; get; }
+
+
 		/// <summary>
 		/// Gets or sets the color of the background.
 		/// </summary>
@@ -644,29 +646,32 @@ namespace MonoTouch.SlideoutNavigation
 		/// </summary>
 		public void Hide (bool animate = true)
 		{
-			//Don't hide if its not visible.
-			if (!Visible)
-				return;
-			Visible = false;
+			this.InvokeOnMainThread(()=>{
+				//Don't hide if its not visible.
+				if (!Visible)
+					return;
+				Visible = false;
 
-			UIView view = _internalTopView.View;
+				UIView view = _internalTopView.View;
 
-			NSAction animation = () => {
-				view.Frame = new RectangleF (0, 0, view.Frame.Width, view.Frame.Height); };
-			NSAction finished = () => {
-				if (view.Subviews.Length > 0)
-					view.Subviews [0].UserInteractionEnabled = true;
-				view.RemoveGestureRecognizer (_tapGesture);
-				//Hide the shadow when not needed to increase performance of the top layer!
-				HideShadow ();
-			};
+				NSAction animation = () => {
+					view.Frame = new RectangleF (0, 0, view.Frame.Width, view.Frame.Height); };
+				NSAction finished = () => {
+					if (view.Subviews.Length > 0)
+						view.Subviews [0].UserInteractionEnabled = true;
+					view.RemoveGestureRecognizer (_tapGesture);
+					//Hide the shadow when not needed to increase performance of the top layer!
+					HideShadow ();
+				};
 
-			if (animate)
-				UIView.Animate (SlideSpeed, 0, UIViewAnimationOptions.CurveEaseInOut, animation, finished);
-			else {
-				animation ();
-				finished ();
-			}
+				if (animate)
+					UIView.Animate (SlideSpeed, 0, UIViewAnimationOptions.CurveEaseInOut, animation, finished);
+				else {
+					animation ();
+					finished ();
+				}
+			});
+
 		}
 
 		/// <summary>
@@ -754,31 +759,31 @@ namespace MonoTouch.SlideoutNavigation
 
 		private class CustomGestureRecognizer : UIPanGestureRecognizer
 		{
-//			bool _drag;
-//			float _moveX;
-//			public override void TouchesMoved(NSSet touches, UIEvent evt)
-//			{
-//				base.TouchesMoved(touches, evt);
-//				if (this.State == UIGestureRecognizerState.Failed) return;
-//				var nowPoint = ((UITouch)touches.AnyObject).LocationInView(this.View);
-//				var prevPoint = ((UITouch)touches.AnyObject).PreviousLocationInView(this.View);
-//				_moveX += prevPoint.X - nowPoint.X;
-//
-//				if (!_drag)
-//				{
-//					if (Math.Abs(_moveX) > 20)
-//					{
-//						_drag = true;
-//					}
-//				}
-//			}
-//
-//			public override void Reset()
-//			{
-//				base.Reset();
-//				_drag = false;
-//				_moveX = 0;
-//			}
+			//			bool _drag;
+			//			float _moveX;
+			//			public override void TouchesMoved(NSSet touches, UIEvent evt)
+			//			{
+			//				base.TouchesMoved(touches, evt);
+			//				if (this.State == UIGestureRecognizerState.Failed) return;
+			//				var nowPoint = ((UITouch)touches.AnyObject).LocationInView(this.View);
+			//				var prevPoint = ((UITouch)touches.AnyObject).PreviousLocationInView(this.View);
+			//				_moveX += prevPoint.X - nowPoint.X;
+			//
+			//				if (!_drag)
+			//				{
+			//					if (Math.Abs(_moveX) > 20)
+			//					{
+			//						_drag = true;
+			//					}
+			//				}
+			//			}
+			//
+			//			public override void Reset()
+			//			{
+			//				base.Reset();
+			//				_drag = false;
+			//				_moveX = 0;
+			//			}
 		}
 
 
