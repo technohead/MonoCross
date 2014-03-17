@@ -54,7 +54,7 @@ namespace MonoCross.Touch
 				string bitmapFile = string.Empty;
 				MXTouchContainerOptions options = Attribute.GetCustomAttribute(appDelegate.GetType(), typeof(MXTouchContainerOptions)) as MXTouchContainerOptions;
 				if (options != null) {
-					bitmapFile = options.SplashBitmap;
+					bitmapFile = "Default";
 				}
 
 				if (!String.IsNullOrEmpty(bitmapFile))
@@ -62,6 +62,7 @@ namespace MonoCross.Touch
 					splashViewController = new SplashViewController(bitmapFile);
 					window.AddSubview(splashViewController.View);
 					window.MakeKeyAndVisible();
+
 				}
 			}
 
@@ -129,9 +130,17 @@ namespace MonoCross.Touch
 		private void ShowView ()
 		{
 
-
-
 		}
+
+
+		public void ShowSplashView(bool show = true)
+		{
+			if (show)
+				this.window.BringSubviewToFront(this.splashViewController.View);
+			else
+				this.window.SendSubviewToBack(this.splashViewController.View);
+		}
+
 
 
 		public event Action<IMXController> ControllerLoadComplete;
