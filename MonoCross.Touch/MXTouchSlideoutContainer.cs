@@ -136,9 +136,15 @@ namespace MonoCross.Touch
 		public void ShowSplashView(bool show = true)
 		{
 			if (show)
+			{
 				this.window.BringSubviewToFront(this.splashViewController.View);
+				this.splashViewController.View.Hidden = false;
+			}
 			else
-				this.window.SendSubviewToBack(this.splashViewController.View);
+			{
+				this.splashViewController.View.Hidden = true;
+			}
+
 		}
 
 
