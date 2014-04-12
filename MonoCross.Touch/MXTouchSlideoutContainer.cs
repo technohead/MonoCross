@@ -7,34 +7,18 @@ using MonoCross.Touch;
 
 namespace MonoCross.Touch
 {
-	public class MXTouchSlideoutContainer : MXContainer
+	public class MXTouchSlideoutContainer : BaseMXTouchContainer
 	{
-		protected UIWindow window;
-		protected UIApplicationDelegate appDelegate;
-		protected SplashViewController splashViewController = null;
-
-
 		public delegate UIViewController RenderLayerDelegate(IMXView view);
 
 		public static RenderLayerDelegate RenderLayer { get; set; }
 		public static SlideoutNavigationController Menu { get; protected set; }
 
-		protected MXTouchSlideoutContainer (MXApplication theApp): base(theApp)
+		protected MXTouchSlideoutContainer (MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window): base(theApp, appDelegate, window)
 		{
 		}
 
-		private MXTouchSlideoutContainer (MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window): base(theApp)
-		{
-			this.appDelegate = appDelegate;
-			Menu = new SlideoutNavigationController();
-			Menu.BackgroundColor = UIColor.White;
 
-			this.window = window;
-			this.window.RootViewController = Menu;
-
-
-
-		}
 
 		public static void Initialize(MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window)
 		{
@@ -45,28 +29,6 @@ namespace MonoCross.Touch
 			thisContainer.StartApplication();
 		}
 
-		protected void StartApplication()
-		{
-
-			if (window.Subviews.Length == 0)
-			{
-				// toss in a temporary view until async initialization is complete
-				string bitmapFile = string.Empty;
-				MXTouchContainerOptions options = Attribute.GetCustomAttribute(appDelegate.GetType(), typeof(MXTouchContainerOptions)) as MXTouchContainerOptions;
-				if (options != null) {
-					bitmapFile = "Default";
-				}
-
-				if (!String.IsNullOrEmpty(bitmapFile))
-				{
-					splashViewController = new SplashViewController(bitmapFile);
-					window.AddSubview(splashViewController.View);
-					window.MakeKeyAndVisible();
-
-				}
-			}
-
-		}
 
 		public void LoadViewForController(IMXView fromView, IMXController controller, MXViewPerspective viewPerspective)
 		{
@@ -132,20 +94,6 @@ namespace MonoCross.Touch
 
 		}
 
-
-		public void ShowSplashView(bool show = true)
-		{
-			if (show)
-			{
-				this.window.BringSubviewToFront(this.splashViewController.View);
-				this.splashViewController.View.Hidden = false;
-			}
-			else
-			{
-				this.splashViewController.View.Hidden = true;
-			}
-
-		}
 
 
 
