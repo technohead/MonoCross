@@ -46,8 +46,13 @@ namespace MonoCross.Touch
 			}
 			else
 			{
-				this.splashViewController.View.Hidden = true;
-				this.splashViewController.View.RemoveFromSuperview();
+				if (this.splashViewController != null)
+				{
+					this.splashViewController.View.Hidden = true;
+					this.splashViewController.View.RemoveFromSuperview();
+					this.splashViewController.Dispose();
+					this.splashViewController = null;
+				}
 			}
 
 		}
