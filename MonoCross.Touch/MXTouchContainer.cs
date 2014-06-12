@@ -308,6 +308,7 @@ namespace MonoCross.Touch
 				}
 				catch (Exception ex)
 				{
+					Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
 					if (ex.Message.StartsWith("Objective-C exception thrown.  Name: NSInvalidArgumentException Reason: Pushing"))
 						parentViewController.NavigationController.PopToViewController(viewController, true);
 					else

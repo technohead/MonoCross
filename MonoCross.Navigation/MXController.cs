@@ -26,6 +26,9 @@ namespace MonoCross.Navigation
 
 		public object GetModel() { return Model; }
         public abstract string Load(Dictionary<string, object> parameters);
-        public virtual void RenderView() { if (View != null) View.Render(); }
+        public virtual void RenderView() { 
+			if (View != null) 
+				View.Render(); 
+		}
     }
 }
