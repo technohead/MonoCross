@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using MonoCross.Navigation;
 using MonoCross.Touch;
@@ -116,13 +117,10 @@ namespace MonoCross.Touch
 		//public String Icon { get; set; }
 	}
 	
-	public class MXTouchContainer: MXContainer
+	public class MXTouchContainer: BaseMXTouchContainer
 	{
-		MXTouchNavigation _touchNavigation;
-		UIWindow _window;
-		UIApplicationDelegate _appDelegate;
-		LoadingView _loadingView;
-		SplashViewController _splashViewController = null;
+		MXTouchNavigation touchNavigation;
+		LoadingView loadingView;
 
 		public static RenderLayerDelegate RenderLayer { get; set; }
 
@@ -130,36 +128,16 @@ namespace MonoCross.Touch
 
 
 
-		private MXTouchContainer (MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window): base(theApp)
+		private MXTouchContainer (MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window): base(theApp, appDelegate, window)
 		{
-			_appDelegate = appDelegate;
-			_touchNavigation = new MXTouchNavigation(_appDelegate, window);
-			_window = window;
-			
+			touchNavigation = new MXTouchNavigation(appDelegate, window);
+
 			ViewGroups = new List<MXTouchViewGroup>();
 		}
 
 		public List<MXTouchViewGroup> ViewGroups { get; private set; }
 
-		private void StartApplication()
-		{
-			if (_window.Subviews.Length == 0)
-			{
-				// toss in a temporary view until async initialization is complete
-				string bitmapFile = string.Empty;
-				MXTouchContainerOptions options = Attribute.GetCustomAttribute(_appDelegate.GetType(), typeof(MXTouchContainerOptions)) as MXTouchContainerOptions;
-				if (options != null) {
-					bitmapFile = options.SplashBitmap;
-				}
 
-				if (!String.IsNullOrEmpty(bitmapFile))
-				{
-					_splashViewController = new SplashViewController(bitmapFile);
-					_window.AddSubview(_splashViewController.View);
-					_window.MakeKeyAndVisible();
-				}
-			}
-		}
 		
 		public static void Initialize(MXApplication theApp, UIApplicationDelegate appDelegate, UIWindow window)
 		{
@@ -170,8 +148,8 @@ namespace MonoCross.Touch
 			thisContainer.StartApplication();
 		}
 		
-		public UINavigationController MasterNavigationController { get { return _touchNavigation.MasterNavigationController; } }
-		public UINavigationController DetailNavigationController { get { return _touchNavigation.DetailNavigationController; } }
+		public UINavigationController MasterNavigationController { get { return touchNavigation.MasterNavigationController; } }
+		public UINavigationController DetailNavigationController { get { return touchNavigation.DetailNavigationController; } }
 		
 		public override void Redirect(string url)
 		{
@@ -196,7 +174,7 @@ namespace MonoCross.Touch
 		{
 			Console.WriteLine("Controller Load End");
 			
-			_appDelegate.InvokeOnMainThread( delegate {
+			appDelegate.InvokeOnMainThread( delegate {
 				LoadViewForController(fromView, controller, viewPerspective);
 				if (ControllerLoadComplete != null)
 					ControllerLoadComplete(controller);
@@ -246,12 +224,12 @@ namespace MonoCross.Touch
 		{
 			if (_firstView)
 			{
-				foreach (var view in _window.Subviews)
+				foreach (var view in window.Subviews)
 					view.RemoveFromSuperview();
 				
 				_firstView = false;
-				_window.Add(_touchNavigation.View);
-				_window.MakeKeyAndVisible();
+				window.Add(touchNavigation.View);
+				window.MakeKeyAndVisible();
 			}
 		}
 		
@@ -296,25 +274,17 @@ namespace MonoCross.Touch
 			if (navigationContext == ViewNavigationContext.Modal)
 			{
 				// treat as a modal/popup view
-				_touchNavigation.PushToModel(viewController);
+				touchNavigation.PushToModel(viewController);
 			}
 			else if (navigationContext == ViewNavigationContext.InContext)
 			{
 				// it's just an in-context view, just slap it on top of the view that navigated it here!
 				UIViewController parentViewController = fromView as UIViewController;
-				try
-				{
+				if (!parentViewController.NavigationController.ViewControllers.Contains(viewController))
 					parentViewController.NavigationController.PushViewController(viewController, true);
-				}
-				catch (Exception ex)
-				{
-					Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
-					if (ex.Message.StartsWith("Objective-C exception thrown.  Name: NSInvalidArgumentException Reason: Pushing"))
-						parentViewController.NavigationController.PopToViewController(viewController, true);
-					else
-						throw;
+				else
+					parentViewController.NavigationController.PopToViewController(viewController, true);
 
-				}
 			}
 			else 
 			{
@@ -337,7 +307,7 @@ namespace MonoCross.Touch
 				if (viewGroup != null)
 				{
 					// activate the group!
-					_touchNavigation.PushToViewGroup(viewGroup, viewGroupItem, controller.View as UIViewController);
+					touchNavigation.PushToViewGroup(viewGroup, viewGroupItem, controller.View as UIViewController);
 
 				}
 				else
@@ -345,10 +315,10 @@ namespace MonoCross.Touch
 					switch (navigationContext)
 					{
 					case ViewNavigationContext.Detail:
-						_touchNavigation.PushToDetail(viewController);
+						touchNavigation.PushToDetail(viewController);
 						break;
 					case ViewNavigationContext.Master:
-						_touchNavigation.PushToMaster(viewController);
+						touchNavigation.PushToMaster(viewController);
 						break;
 					}
 				}

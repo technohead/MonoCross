@@ -64,4 +64,19 @@ namespace MonoCross.Touch
             Model = (T)model;
         }
 	}
+
+	public abstract class MXTouchCollectionViewController<T>: UICollectionViewController, IMXView
+	{
+		public MXTouchCollectionViewController(UICollectionViewLayout layout): base(layout)
+		{
+		}
+
+		public T Model { get; set; }
+		public Type ModelType { get { return typeof(T); } }
+		public abstract void Render();
+		public void SetModel(object model)
+		{
+			Model = (T)model;
+		}
+	}
 }

@@ -72,6 +72,10 @@
     <Compile Include="SplitViewController\MGDividerView.cs" />
     <Compile Include="SplitViewController\MGSplitViewController.cs" />
     <Compile Include="SplitViewController\MGCornersView.cs" />
+    <Compile Include="MXSlideoutContainer.cs" />
+    <Compile Include="SlideoutNavigationController.cs" />
+    <Compile Include="MXTouchSlideoutContainer.cs" />
+    <Compile Include="BaseMXTouchContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoCross.Navigation\MonoCross.Navigation.MT.csproj">

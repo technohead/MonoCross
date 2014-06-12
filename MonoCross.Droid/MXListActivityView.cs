@@ -26,7 +26,7 @@ namespace MonoCross.Droid
                 {
                     throw new ApplicationException("The navigation map does not contain any controllers for type " + t);
                 }
-                mapping.Controller.Load(new Dictionary<string, string>());
+                mapping.Controller.Load(new Dictionary<string, object>());
                 SetModel(mapping.Controller.GetModel());
             }
 
