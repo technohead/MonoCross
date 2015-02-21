@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace MonoCross.Navigation
 {
     public static class MXNavigationExtensions
     {
-        public static void Navigate(this IMXView view, string url)
+		public static Task Navigate(this IMXView view, string url)
         {
-            MXContainer.Navigate(view, url);
+			return MXContainer.Navigate(view, url);
         }
 
-        public static void Navigate(this IMXView view, string url, Dictionary<string, object> parameters)
+		public static Task Navigate(this IMXView view, string url, Dictionary<string, object> parameters)
         {
-            MXContainer.Navigate(view, url, parameters);
+			return MXContainer.Navigate(view, url, parameters);
         }
     }
 
@@ -155,23 +156,24 @@ namespace MonoCross.Navigation
             return Instance.App.NavigationMap.FirstOrDefault(pattern => Regex.Match(url, pattern.RegexPattern()).Value == url);
         }
 
-        public static void Navigate(string url)
+		public static Task Navigate(string url)
         {
-            InternalNavigate(null, url, new Dictionary<string, object>());
+			return InternalNavigate(null, url, new Dictionary<string, object>());
         }
 
-        public static void Navigate(IMXView view, string url)
+		public static Task Navigate(IMXView view, string url)
         {
-            InternalNavigate(view, url, new Dictionary<string, object>());
+			return InternalNavigate(view, url, new Dictionary<string, object>());
         }
 
-        public static void Navigate(IMXView view, string url, Dictionary<string, object> parameters)
+		public static Task Navigate(IMXView view, string url, Dictionary<string, object> parameters)
         {
-            InternalNavigate(view, url, parameters);
+			return InternalNavigate(view, url, parameters);
         }
 
-        private static void InternalNavigate(IMXView fromView, string url, Dictionary<string, object> parameters)
+		private static Task InternalNavigate(IMXView fromView, string url, Dictionary<string, object> parameters)
         {
+			Task result = null;
             MXContainer container = Instance;   // optimization for the server size, property reference is a hashed lookup
 
             // fetch and allocate a viable controller
@@ -189,23 +191,22 @@ namespace MonoCross.Navigation
                     // Console.WriteLine("InternalNavigate: Locked");
 
                     // if there is no synchronization, don't launch a new thread
-                    if (container.ThreadedLoad)
-                    {
+					if (container.ThreadedLoad)
+					{
                         // new thread to execute the Load() method for the layer
-#if NETFX_CORE
-                        System.Threading.Tasks.Task.Factory.StartNew(() => TryLoadController(container, fromView, controller, parameters), System.Threading.Tasks.TaskCreationOptions.LongRunning);
-#else
-                        new Thread(() => TryLoadController(container, fromView, controller, parameters)).Start();
-#endif
+
+						result = System.Threading.Tasks.Task.Factory.StartNew(() => TryLoadController(container, fromView, controller, parameters), System.Threading.Tasks.TaskCreationOptions.LongRunning);
                     }
                     else
                     {
-                        TryLoadController(container, fromView, controller, parameters);
+						result = new Task(()=>{ TryLoadController(container, fromView, controller, parameters); });
                     }
 
                     // Console.WriteLine("InternalNavigate: Unlocking");
                 }
             }
+
+			return result;
         }
 
         static void TryLoadController(MXContainer container, IMXView fromView, IMXController controller, Dictionary<string, object> parameters)
