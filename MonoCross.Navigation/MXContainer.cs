@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Foundation;
 
 namespace MonoCross.Navigation
 {
@@ -31,7 +32,7 @@ namespace MonoCross.Navigation
         /// </summary>
         protected bool CancelLoad = false;
 
-        /// <summary>
+		      /// <summary>
         /// 
         /// </summary>
         public bool ThreadedLoad = true;
@@ -213,7 +214,12 @@ namespace MonoCross.Navigation
         {
             try
             {
-                container.LoadController(fromView, controller, parameters);
+				NSObject nso = new NSObject();
+
+				nso.InvokeOnMainThread(()=>{
+					container.LoadController(fromView, controller, parameters);
+				});
+               
             }
             catch (Exception ex)
             {

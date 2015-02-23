@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using MonoCross.Navigation;
 using MonoTouch.SlideoutNavigation;
-using MonoTouch.UIKit;
+using UIKit;
 using MonoCross.Touch;
 
 namespace MonoCross.Touch

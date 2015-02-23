@@ -1,10 +1,10 @@
 using System;
 
-using MonoTouch.UIKit;
+using UIKit;
 using MonoTouch.Dialog;
 
 using MonoCross.Navigation;
-using MonoTouch.Foundation;
+using Foundation;
 
 namespace MonoCross.Touch
 {

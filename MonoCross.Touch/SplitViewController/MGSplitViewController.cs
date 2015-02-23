@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using CoreGraphics;
 using System.Linq;
 using System.Text;
 using System.Threading;
 
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
-using MonoTouch.UIKit;
+using Foundation;
+using ObjCRuntime;
+using UIKit;
 
 namespace MonoCross.Touch
 {
@@ -51,11 +51,11 @@ namespace MonoCross.Touch
 		{
 		}
 			
-		public virtual void WillMoveSplitToPosition(float position)
+		public virtual void WillMoveSplitToPosition(nfloat position)
 		{
 		}
 		
-		public virtual float ConstrainSplitPosition(float newSize, SizeF fullSize)
+		public virtual nfloat ConstrainSplitPosition(nfloat newSize, CGSize fullSize)
 		{
 			return newSize;
 		}
@@ -63,11 +63,11 @@ namespace MonoCross.Touch
 	
 	public class MGSplitViewController : UIViewController
 	{
-		public float DefaultThinWidth { get { return 1.0f; } }
-		public float DefaultThickWidth { get { return 12.0f; } }
+		public nfloat DefaultThinWidth { get { return 1.0f; } }
+		public nfloat DefaultThickWidth { get { return 12.0f; } }
 		
-		public float SplitPosition { get; internal set; }
-		public float SplitWidth { get; internal set; }
+		public nfloat SplitPosition { get; internal set; }
+		public nfloat SplitWidth { get; internal set; }
 		public bool Vertical { get; internal set; }
 		public bool MasterBeforeDetail { get; set; }
 
@@ -80,13 +80,13 @@ namespace MonoCross.Touch
 		internal MGSplitDividerView DividerView { get; set; }
 		internal MGSplitViewDividerStyle DividerStyle { get; set; }
 		
-		private float _defaultSplitPosition = 320.0f;
-		private float _defaultCornerRadius = 5.0f;
+		private nfloat _defaultSplitPosition = 320.0f;
+		private nfloat _defaultCornerRadius = 5.0f;
 		private UIColor _defaultCornerColor = UIColor.Black;
 		
-		private float _panesplitterCornerRadius = 0.0f;
+		private nfloat _panesplitterCornerRadius = 0.0f;
 		
-		private float _minViewWidth	= 200.0f;
+		private nfloat _minViewWidth	= 200.0f;
 		
 		private string _animationChangeSplitOrientation = "ChangeSplitOrientation";	// Animation ID for internal use.
 		private string _animationChangeSubviewsOrder = "ChangeSubviewsOrder";	// Animation ID for internal use.
@@ -294,18 +294,18 @@ namespace MonoCross.Touch
 		}
 		*/
 		
-		SizeF SplitViewSizeForOrientation(UIInterfaceOrientation theOrientation)
+		CGSize SplitViewSizeForOrientation(UIInterfaceOrientation theOrientation)
 		{
 			UIScreen screen = UIScreen.MainScreen;
-			RectangleF fullScreenRect = screen.Bounds; // always implicitly in Portrait orientation.
+			CGRect fullScreenRect = screen.Bounds; // always implicitly in Portrait orientation.
 		
 			// Find status bar height by checking which dimension of the applicationFrame is narrower than screen bounds.
 			// Little bit ugly looking, but it'll still work even if they change the status bar height in future.
 			//float statusBarHeight = MAX((fullScreenRect.size.width - appFrame.size.width), (fullScreenRect.size.height - appFrame.size.height));
 		
 			// Initially assume portrait orientation.
-			float width = fullScreenRect.Size.Width;
-			float height = fullScreenRect.Size.Height;
+			nfloat width = fullScreenRect.Size.Width;
+			nfloat height = fullScreenRect.Size.Height;
 		
 			// Correct for orientation.
 			if (IsLandscape(theOrientation)) {
@@ -316,7 +316,7 @@ namespace MonoCross.Touch
 			// Account for status bar, which always subtracts from the height (since it's always at the top of the screen).
 			height -= 20;
 		
-			return new SizeF(width, height);
+			return new CGSize(width, height);
 		}
 		
 		void LayoutSubviews(UIInterfaceOrientation theOrientation, bool animate)
@@ -333,16 +333,16 @@ namespace MonoCross.Touch
 			
 			// Layout the master, detail and divider views appropriately, adding/removing subviews as needed.
 			// First obtain relevant geometry.
-			SizeF fullSize = SplitViewSizeForOrientation(theOrientation);
-			float width = fullSize.Width;
-			float height = fullSize.Height;
+			CGSize fullSize = SplitViewSizeForOrientation(theOrientation);
+			nfloat width = fullSize.Width;
+			nfloat height = fullSize.Height;
 			
 			// Layout the master, divider and detail views.
-			RectangleF newFrame = new RectangleF(0, 0, width, height);
+			CGRect newFrame = new CGRect(0, 0, width, height);
 			UIView view;
 			bool shouldShowMaster = ShouldShowMaster(theOrientation);
 			bool masterFirst = MasterBeforeDetail;
-			RectangleF masterRect, dividerRect, detailRect;
+			CGRect masterRect, dividerRect, detailRect;
 			if (Vertical) {				
 				if (masterFirst) {
 					if (!ShouldShowMaster()) {
@@ -500,24 +500,24 @@ namespace MonoCross.Touch
 			leadingCorners.AutoresizingMask = (Vertical) ? UIViewAutoresizing.FlexibleBottomMargin : UIViewAutoresizing.FlexibleRightMargin;
 			trailingCorners.AutoresizingMask = (Vertical) ? UIViewAutoresizing.FlexibleTopMargin : UIViewAutoresizing.FlexibleLeftMargin;
 		
-			float x, y, cornersWidth, cornersHeight;
-			RectangleF leadingRect, trailingRect;
-			float radius = leadingCorners.CornerRadius;
+			nfloat x, y, cornersWidth, cornersHeight;
+			CGRect leadingRect, trailingRect;
+			nfloat radius = leadingCorners.CornerRadius;
 			if (Vertical) { // left/right split
 				cornersWidth = (radius * 2.0f) + SplitWidth;
 				cornersHeight = radius;
 				x = ((shouldShowMaster) ? ((masterFirst) ? SplitPosition : width - (SplitPosition + SplitWidth)) : (0 - SplitWidth)) - radius;
 				y = 0;
-				leadingRect = new RectangleF(x, y, cornersWidth, cornersHeight); // top corners
-				trailingRect = new RectangleF(x, (height - cornersHeight), cornersWidth, cornersHeight); // bottom corners
+				leadingRect = new CGRect(x, y, cornersWidth, cornersHeight); // top corners
+				trailingRect = new CGRect(x, (height - cornersHeight), cornersWidth, cornersHeight); // bottom corners
 		
 			} else { // top/bottom split
 				x = 0;
 				y = ((shouldShowMaster) ? ((masterFirst) ? SplitPosition : height - (SplitPosition + SplitWidth)) : (0 - SplitWidth)) - radius;
 				cornersWidth = radius;
 				cornersHeight = (radius * 2.0f) + SplitWidth;
-				leadingRect = new RectangleF(x, y, cornersWidth, cornersHeight); // left corners
-				trailingRect = new RectangleF((width - cornersWidth), y, cornersWidth, cornersHeight); // right corners
+				leadingRect = new CGRect(x, y, cornersWidth, cornersHeight); // left corners
+				trailingRect = new CGRect((width - cornersWidth), y, cornersWidth, cornersHeight); // right corners
 			}
 		
 			leadingCorners.Frame = leadingRect;
@@ -650,7 +650,7 @@ namespace MonoCross.Touch
 			else if (!inPopover && _hiddenPopoverController != null && _barButtonItem != null)
 			{
 				// I know this looks strange, but it fixes a bizarre issue with UIPopoverController leaving masterViewController's views in disarray.
-				_hiddenPopoverController.PresentFromRect(RectangleF.Empty, View, UIPopoverArrowDirection.Any, false);
+				_hiddenPopoverController.PresentFromRect(CGRect.Empty, View, UIPopoverArrowDirection.Any, false);
 		
 				// Remove master from popover and destroy popover, if it exists.
 				_hiddenPopoverController.Dismiss(false);
@@ -869,9 +869,9 @@ namespace MonoCross.Touch
 		public void SetSplitPosition(float pos)
 		{
 			// Check to see if delegate wishes to constrain the position.
-			float newPos = pos;
+			nfloat newPos = pos;
 			bool constrained = false;
-			SizeF fullSize = SplitViewSizeForOrientation(InterfaceOrientation);
+			CGSize fullSize = SplitViewSizeForOrientation(InterfaceOrientation);
 			if (_splitViewDelegate != null)
 			{
 				newPos = _splitViewDelegate.ConstrainSplitPosition(newPos, fullSize);
@@ -880,8 +880,8 @@ namespace MonoCross.Touch
 			else
 			{
 				// Apply default constraints if delegate doesn't wish to participate.
-				float minPos = _minViewWidth;
-				float maxPos = ((Vertical) ? fullSize.Width : fullSize.Height) - (_minViewWidth + SplitWidth);
+				nfloat minPos = _minViewWidth;
+				nfloat maxPos = ((Vertical) ? fullSize.Width : fullSize.Height) - (_minViewWidth + SplitWidth);
 				constrained = (newPos != SplitPosition && newPos >= minPos && newPos <= maxPos);
 			}
 		
@@ -1005,7 +1005,7 @@ namespace MonoCross.Touch
 			DividerStyle = newStyle;
 		
 			// Reconfigure general appearance and behaviour.
-			float cornerRadius = 0;
+			nfloat cornerRadius = 0;
 			if (DividerStyle == MGSplitViewDividerStyle.Thin) {
 				cornerRadius = _defaultCornerRadius;
 				SplitWidth = DefaultThinWidth;
